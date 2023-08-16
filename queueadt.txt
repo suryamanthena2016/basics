@@ -1,0 +1,155 @@
+
+/*                      ASSIGNMENT NO. :1(A)                            */
+/*                    IMPLEMENTATION OF QUEUE USING ARRAYS              */
+
+#include<iostream.h>
+#include<conio.h>
+#define MAX 20
+
+class queue  
+{
+  int front,rear;   
+  int q[MAX];      
+  public:
+    queue();
+    void insert(void);  
+    int remove(void);    
+    void display(void);  
+};
+
+queue :: queue()
+{
+  front=MAX-1;    
+  rear=MAX-1;
+  for( int i=0;i<MAX;i++)  
+    q[i]=-1;              
+}
+
+void queue::insert()
+{
+  rear++;       // REAR IS USED  TO INSERT THE ELEMENT  IN A QUEUE
+
+  if(rear==MAX)     
+    rear=0;           
+
+  if(q[rear]!=-1)      // OVEERFLOW CONDITION 
+  {
+      cout<<"\n                           Queue overflow !!\n";
+      if(rear==0)
+	rear=MAX-1;   
+      else
+	rear--;
+  }
+  else    
+  {
+      int x;
+      cout<<"\n                           Enter the element :";
+      cin>>x;
+      q[rear]=x;  
+      clrscr();
+      cout<<"\n\n\n\n\n\n";
+      cout<<"\n                           Your element is inserted !!";
+  }
+}
+
+int queue :: remove()
+{
+		     // FRONT IS USED  TO DELETE THE ELEMENT  IN A QUEUE
+  if(front==rear)    // UNDERFLOW CONDITION 
+  {
+    cout<<"\n                                  Queue underflow !!\n";
+    return(0);
+  }
+  else 
+  {
+   
+    front++;
+    if(front==MAX)  
+      front=0;
+    int x=q[front];
+    q[front]=-1;   
+    return(x);
+  }
+}
+
+void queue :: display()
+{
+  if(front==rear)  
+    cout<<"\n                        Queue Under flow !! \n";
+  else  
+  {
+     int y;
+     if(front==MAX-1)
+	y=0;
+     else
+	y=front+1;
+     do  
+     {
+       cout<<q[y]<<"===>>";
+       if(y==MAX-1)
+	 y=-1;
+       if(y==rear)
+	 break;
+       y++;
+     }while(y<=rear);
+  }
+  cout<<"\n";
+}
+
+
+int main()
+{
+  queue q;
+  int ch;
+  clrscr();
+  do
+  {
+    clrscr();
+    cout<<"\n\n\n\n\n\n\n";
+    cout<<"                           ---------------------------------------\n";
+    cout<<"                                           MENU                   \n";
+    cout<<"                           ---------------------------------------\n";
+    cout<<"                             1. INSERT AN ITEM                 \n";
+    cout<<"                             2. DELETE AN ITEM                 \n";
+    cout<<"                             3. DISPLAY QUEUE                  \n";
+    cout<<"                             4. EXIT                              \n";
+    cout<<"                           ---------------------------------------\n";
+    cout<<"                             Enter your choice  :";
+    cin>>ch;
+    switch(ch)
+    {
+      case 1:   clrscr();
+		cout<<"\n\n\n\n\n\n\n";
+		q.insert();
+		cout<<"\n\n\n                             Press any key to continue....";
+		getch();
+		break;
+      case 2:   clrscr();
+		cout<<"\n\n\n\n\n\n\n";
+		cout<<"\n                              The deleted item is :";
+		cout<<q.remove();
+		cout<<"\n\n\n                             Press any key to continue....";
+		getch();
+		break;
+      case 3:   clrscr();
+		cout<<"\n\n\n\n\n\n\n";
+		cout<<"\n                               The items in queueue are :";
+		q.display();
+		cout<<"\n\n\n                             Press any key to continue....";
+		getch();
+		break;
+      case 4:   clrscr();
+		cout<<"\n\n\n\n\n\n\n";
+		cout<<"\n\n\n                             Press any key to continue....";
+		getch();
+		break;
+      default:  clrscr();
+		cout<<"\n\n\n\n\n\n\n";
+		cout<<"\n ENTERED  CHOICE IS WRONG !! \n";
+		cout<<"\n\n\n                             Press any key to continue....";
+		getch();
+		break;
+    }
+  }while(ch!=4);
+  return(0);
+}
